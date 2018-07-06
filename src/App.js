@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
+import { client } from './Client';
+import history from './history';
 // Styles
 // CoreUI Icons Set
 import '@coreui/icons/css/coreui-icons.min.css';
@@ -14,24 +16,36 @@ import 'simple-line-icons/css/simple-line-icons.css';
 import './scss/style.css'
 
 // Containers
-import { DefaultLayout } from './containers';
+import { CmsLayout } from './cmscontainers';
 // Pages
 import { Login, Page404, Page500, Register } from './views/Pages';
 
 // import { renderRoutes } from 'react-router-config';
 
+const AuthRoute = props => {
+  const { Component, path } = props;
+  
+  return (
+    <Route path={path} render={ () => 
+      client.isAuthenticated() ? 
+      <Component {...props}/> :
+      <Redirect to={{ pathname: '/login'}} />
+    }/>
+  )
+};
+
 class App extends Component {
   render() {
     return (
-      <HashRouter>
+      <Router history={history}>
         <Switch>
-          <Route exact path="/login" name="Login Page" component={Login} />
+          <Route exact path="/login" name="Login Page" render={() => <Login client={client} />} />
           <Route exact path="/register" name="Register Page" component={Register} />
           <Route exact path="/404" name="Page 404" component={Page404} />
           <Route exact path="/500" name="Page 500" component={Page500} />
-          <Route path="/" name="Home" component={DefaultLayout} />
+          <AuthRoute path="/" name="Home" Component={CmsLayout} client={client} />
         </Switch>
-      </HashRouter>
+      </Router>
     );
   }
 }

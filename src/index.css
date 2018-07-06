@@ -1,1 +1,17 @@
+.card-test{
+  margin-bottom: 0.5rem!important;
+}
 
+#accordion{
+  position: relative;
+  overflow: auto;
+}
+
+.ace_editor{
+  margin-bottom: 0.5rem;
+}
+
+.icon-arrow-left{
+  display: inline-block!important;
+  margin-left: 0.9rem;
+}

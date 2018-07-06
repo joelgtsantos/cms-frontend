@@ -1,0 +1,6 @@
+{
+  "name": "CmsLayout",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./CmsLayout.js"
+}

@@ -1,7 +1,9 @@
 import React from 'react';
 import Loadable from 'react-loadable'
 
-import DefaultLayout from './containers/DefaultLayout';
+//import DefaultLayout from './containers/DefaultLayout';
+
+import CmsLayout from './cmscontainers/CmsLayout';
 
 function Loading() {
   return <div>Loading...</div>;
@@ -182,11 +184,23 @@ const User = Loadable({
   loading: Loading,
 });
 
+const Tasks = Loadable({
+  loader: () => import('./views/Tasks'),
+  loading: Loading,
+});
+
+const Task = Loadable({
+  loader: () => import('./views/Tasks/Task'),
+  loading: Loading,
+});
+
 
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
-  { path: '/', exact: true, name: 'Home', component: DefaultLayout },
+  { path: '/', exact: true, name: 'Home', component: CmsLayout },
+  { path: '/tasks', exact: true, name: 'Tasks', component: Tasks },
+  { path: '/tasks/:id', exact: true, name: 'Task', component: Task },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
