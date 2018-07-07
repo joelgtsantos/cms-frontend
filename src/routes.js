@@ -194,6 +194,11 @@ const Task = Loadable({
   loading: Loading,
 });
 
+const Profile = Loadable({
+  loader: () => import('./views/Profile'),
+  loading: Loading,
+});
+
 
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
@@ -201,6 +206,7 @@ const routes = [
   { path: '/', exact: true, name: 'Home', component: CmsLayout },
   { path: '/tasks', exact: true, name: 'Tasks', component: Tasks },
   { path: '/tasks/:id', exact: true, name: 'Task', component: Task },
+  { path: '/Profile', exact: true, name: 'Profile', component: Profile },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
