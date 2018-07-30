@@ -5,7 +5,11 @@ import 'brace/theme/github';
 import 'brace/mode/java';
 import 'brace/ext/language_tools';
 import 'brace/ext/searchbox';
+import { fetchTask } from '../../../actions';
+import { connect } from 'react-redux';
 import { Autocomplete } from 'brace/ext/language_tools';
+import marked from 'marked';
+import { Base64 } from 'js-base64';
 
 const languages = [
   'java',
@@ -29,6 +33,7 @@ class Task extends Component{
     status: 'Closed',
     fadeIn: true,
     timeout: 300,
+    statements: []
   }
 
   setMode = (e) => {
@@ -45,6 +50,18 @@ class Task extends Component{
     console.log('i\'ve loaded');
   }
 
+  componentDidMount(){
+    this.props.fetchTask(this.props.match.params.id);
+  }
+
+  componentWillReceiveProps(update) {
+    //console.log('this.props.fields', this.props, update);
+    //console.log(update.task);
+    this.setState({ statements: update.task.statements });
+  }
+
+
+
   toggleAccordion(tab) {
 
     const prevState = this.state.accordion;
@@ -55,20 +72,28 @@ class Task extends Component{
     });
   }
 
-
   render(){
+    const task = this.props.task;
+    console.log(task);
+
     return (
       <div className="animated fadeIn">
         <Row>
           <Col xs="12" md="5">
             <Card>
               <CardHeader>
-                <p>Task {this.props.match.params.id}</p>
+                <p><b>{task.title}</b></p>
               </CardHeader>
               <CardBody>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+              {
+                this.state.statements.map((statement, index) => {
+                return(
+                  <div key={index}>
+                    <div dangerouslySetInnerHTML={{__html:  marked(Base64.decode(statement.text, {sanitize: true}))}} />
+                  </div>
+                  );
+                })
+              }
               </CardBody>
             </Card>
           </Col>
@@ -125,4 +150,10 @@ class Task extends Component{
   }
 }
 
-export default Task;
+function mapStateToProps(state){
+  return {
+    task: state.task
+  }
+}
+
+export default connect(mapStateToProps, { fetchTask })(Task);

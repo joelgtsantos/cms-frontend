@@ -31,7 +31,6 @@ class Contests extends Component {
   }
 
   render() {
-    
     return (
       <div className="animated fadeIn">
         {
@@ -44,12 +43,10 @@ class Contests extends Component {
               <Col xs="12" md={{ size: 8, offset: 2 }}>
                 <Card>
                   <CardHeader>
-                    <i className="fa fa-check float-right"></i><Link to={taskLink}>{task.title}</Link>
+                    <i className="fa fa-check float-right"></i><Link to={taskLink}>{task.name}</Link>
                   </CardHeader>
                   <CardBody>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                    laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                    <h4>{task.title}</h4>
                   </CardBody>
                 </Card>
               </Col>

@@ -1,24 +1,26 @@
+import fetch from 'isomorphic-fetch';
 import history from './history';
 
-const CMS_BASE_URI = 'http://localhost:8080/app/api';
+//const CMS_BASE_URI = 'http://localhost:8080/app/api';
+const CMS_BASE_URI = 'http://localhost:8080/galatea/v1';
 const SESSION_STORAGE_KEY = 'access_token';
 
 class Client {
 
   loggedIn = true;
 
-  _get(url, body) {
-    const bodyParams = Object.keys(body).map( key => {
+  _get(url, body = {}) {
+    /* const bodyParams = Object.keys(body).map( key => {
       return encodeURIComponent(key) + '=' + encodeURIComponent(body[key]);
-    }).join('&');
+    }).join('&'); */
 
-    return fetch(url +'?' + bodyParams, {
+    return fetch(url, {
         method: 'GET',
         headers: {
            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body),
+        }
       }).then(this.checkStatus)
+        .then(this.parseJson)
   }
 
   _post(url, body) {
@@ -32,25 +34,30 @@ class Client {
         .then(this.parseJson)
   }
 
-  getTaks() {
-    //const url = CMS_BASE_URI + '/user/extra';
-    //return this._post(url, profile).then((data) => data);
-    return new Promise((resolve, reject) => {
-        resolve(
-          [
-            { 
-              id: 1,
-              title : 'Taks 1',
-              body: 'body task 1'
-            },
-            { 
-              id: 2,
-              title : 'Taks 2',
-              body: 'body task 2'
-            }
-          ]
-        );
-    });
+  getTasks() {
+    const url = CMS_BASE_URI + '/tasks';
+    return this._get(url).then((data) => data);
+    // return new Promise((resolve, reject) => {
+    //     resolve(
+    //       [
+    //         { 
+    //           id: 1,
+    //           title : 'Taks 1',
+    //           body: 'body task 1'
+    //         },
+    //         { 
+    //           id: 2,
+    //           title : 'Taks 2',
+    //           body: 'body task 2'
+    //         }
+    //       ]
+    //     );
+    // });
+  }
+
+  getTask(id) {
+    const url = CMS_BASE_URI + `/tasks/${id}?lang=es`;
+    return this._get(url).then((data) => data);
   }
 
   checkStatus(response) {
