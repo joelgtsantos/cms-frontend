@@ -1,4 +1,7 @@
-# React-Based Fronted for CMS 
+# React-Based Frontend for CMS 
+
+A react app for displaying a basic workflow of CMS contest having a base a CoreUI free template.
+
 
 ## Live App
 
@@ -8,7 +11,7 @@
 
 ``` bash
 # clone the repo
-$ git clone https://github.com/coreui/coreui-free-react-admin-template.git my-project
+$ git clone https://github.com/joelgtsantos/cms-frontend.git my-project
 
 # go into app's directory
 $ cd my-project
@@ -47,4 +50,7 @@ CoreUI-React#v2.0.0
 └── package.json
 ```
 
-### Modules
+
+## Credits
+
+- [CoreUI](https://github.com/coreui/coreui-free-react-admin-template) by [CoreUI template ]

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Badge, Card, CardBody, CardFooter, CardHeader, Col, Row, Collapse, Fade } from 'reactstrap';
-import { AppSwitch } from '@coreui/react'
 import { connect } from 'react-redux';
 import { fetchTasks } from '../../actions';
+import { Badge, Card, CardBody, CardFooter, CardHeader, Col, Row, Collapse, Fade } from 'reactstrap';
+import { AppSwitch } from '@coreui/react'
 
 class Contests extends Component {
   constructor(props) {
@@ -31,8 +31,11 @@ class Contests extends Component {
   }
 
   render() {
+    console.log(this.props.client);
     return (
       <div className="animated fadeIn">
+        <h5> Bienvenido {this.props.client.profile.firstName} </h5>
+        <br/>
         {
           this.props.tasks.map((task, index) => {
             //const taskLink = `#/tasks/${task.id}`;

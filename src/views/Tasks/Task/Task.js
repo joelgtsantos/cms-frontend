@@ -60,8 +60,6 @@ class Task extends Component{
     this.setState({ statements: update.task.statements });
   }
 
-
-
   toggleAccordion(tab) {
 
     const prevState = this.state.accordion;

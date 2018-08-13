@@ -1,25 +1,9 @@
 import { combineReducers } from 'redux';
-import { RECIEVE_TASKS, RECIEVE_TASK } from '../actions';
+import tasks from './tasks';
+import task from './task';
+import profile from './profile';
 
 
-function tasks(state = [], action){
-  switch(action.type){
-    case RECIEVE_TASKS:
-      return action.tasks;
-    default:
-      return state;
-  }
-}
-
-function task(state = [], action){
-  switch(action.type){
-    case RECIEVE_TASK:
-      return action.task;
-    default:
-      return state;
-  }
-}
-
-const rootReducer = combineReducers({ tasks, task });
+const rootReducer = combineReducers({ tasks, task, profile });
 
 export default rootReducer;
