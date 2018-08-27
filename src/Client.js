@@ -198,7 +198,7 @@ class Client {
     const url = `${CMS_BASE_URI_SAO}/scores/${id}`;
     return this._getWithToken(url).then((data) => data);
   }
-
+f
 }
 
 export const client = new Client();

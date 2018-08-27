@@ -27,7 +27,6 @@ class Task extends Component{
     this.setState({ statements: update.task.statements });
   }
 
-
   render(){
     const task = this.props.task;
 
