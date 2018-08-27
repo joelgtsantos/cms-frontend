@@ -44,6 +44,7 @@ CoreUI-React#v2.0.0
 │   ├── App.test.js
 │   ├── index.js    
 │   ├── Client.js    #CMS REST-client
+│   ├── config.js    #config APIs urls
 │   ├── _nav.js      #sidebar config
 │   └── routes.js    #routes config
 │

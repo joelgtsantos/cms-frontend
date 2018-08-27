@@ -1,9 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import history from './history';
-
-//const CMS_BASE_URI = 'http://localhost:8080/app/api';
-const CMS_BASE_URI_PROFILE = 'http://localhost:8080/cmsusers/api/v1';
-const CMS_BASE_URI_GALATEA = 'http://localhost:8081/galatea/v1';
+import { CMS_BASE_URI_PROFILE, CMS_BASE_URI_GALATEA, CMS_BASE_URI_SAO } from './config';
 
 const SESSION_STORAGE_KEY = 'access_token';
 const PROFILE_STORAGE_KEY = 'profile';
@@ -35,7 +32,7 @@ class Client {
 
   _postWithToken(url, body) {
     return fetch(url, {
-        method: 'post',
+        method: 'POST',
         headers: {
            'Content-Type': 'application/json',
            'Authorization': `Bearer ${this.token}`
@@ -47,7 +44,7 @@ class Client {
 
   _post(url, body) {
     return fetch(url, {
-        method: 'post',
+        method: 'POST',
         headers: {
            'Content-Type': 'application/json'
          },
@@ -57,12 +54,12 @@ class Client {
   }
 
   getTasks() {
-    const url = CMS_BASE_URI_GALATEA + '/tasks';
+    const url = `${CMS_BASE_URI_GALATEA}/tasks`;
     return this._get(url).then((data) => data);
   }
 
   getTask(id) {
-    const url = CMS_BASE_URI_GALATEA + `/tasks/${id}?lang=es`;
+    const url = `${CMS_BASE_URI_GALATEA}/tasks/${id}?lang=es`;
     return this._get(url).then((data) => data);
   }
 
@@ -85,7 +82,7 @@ class Client {
   login = (token) => {
     this.token = token;
 
-    const url = CMS_BASE_URI_PROFILE + '/register';
+    const url = `${CMS_BASE_URI_PROFILE}/register`;
     return this._getWithToken(url).then((user) => {
       if (!user.error) {
         localStorage.setItem(SESSION_STORAGE_KEY, token);
@@ -97,12 +94,12 @@ class Client {
   }
 
   getProfile() {
-    const url = CMS_BASE_URI_PROFILE + '/user/extra';
+    const url = `${CMS_BASE_URI_PROFILE}/user/extra`;
     return this._getWithToken(url).then((data) => data);
   }
 
   saveProfile(profile) {
-    const url = CMS_BASE_URI_PROFILE + '/user/extra';
+    const url = `${CMS_BASE_URI_PROFILE}/user/extra`;
     return this._postWithToken(url, profile).then((data) => data);
   }
 
@@ -119,6 +116,87 @@ class Client {
 
   getCredentials = () => {
     return new Promise(function(r){ r(this.token); });
+  }
+
+  /*
+  * SAO Endopoints
+  */
+
+/*   submitEntry = (solvedTask, content, language) => {
+    const task = {
+      "contestSlug": solvedTask.contest.name,
+      "ranked": false,
+      "sources": [
+        {
+          "content": content,
+          "encoding": "Dolor magnam sed est iusto.",
+          "language": language,
+          "name": solvedTask.submissionFileFormats[0].filename
+        }
+      ],
+      "taskSlug": solvedTask.name
+    }
+
+    let that = this;
+
+    return new Promise(function(resolve, reject){
+      //Get entry
+      const url = `${CMS_BASE_URI_SAO}/entries`;
+      that._postWithToken(url, task).then((data) => {
+        
+        const url2 = `${CMS_BASE_URI_SAO}/results/${data.links.result.id}`;
+        //Interval consulting each 0.1s 
+        let result = setInterval(
+          //Get results
+          that._getWithToken(url2, task).then((data) => {
+            console.log(data);
+
+            //Clear inteval if status is ok
+            if (data.evaluation.status === 'ok'){
+              clearInterval(result);
+
+              //Get scores
+              const url2 = `${CMS_BASE_URI_SAO}/scores/scoreID?scoreID=${data.links.score.id}`;
+              that._getWithToken(url2, task).then((data) => {
+                resolve(data);
+              });
+            }
+
+          })
+            ,2000); 
+       });
+    });
+  } */
+
+
+  submitEntry = (solvedTask, content, language) => {
+    const task = {
+      "contestSlug": solvedTask.contest.name,
+      "ranked": false,
+      "sources": [
+        {
+          "content": content,
+          "encoding": "Dolor magnam sed est iusto.",
+          "language": language,
+          "name": solvedTask.submissionFileFormats[0].filename
+        }
+      ],
+      "taskSlug": solvedTask.name
+    }
+
+    const url = `${CMS_BASE_URI_SAO}/entries`;
+
+    return this._postWithToken(url, task).then((data) => data);
+  }
+
+  retrieveResult = (id) => {
+    const url = `${CMS_BASE_URI_SAO}/results/${id}`;
+    return this._getWithToken(url).then((data) => data);
+  }
+
+  retrieveScore = (id) => {
+    const url = `${CMS_BASE_URI_SAO}/scores/${id}`;
+    return this._getWithToken(url).then((data) => data);
   }
 
 }
