@@ -1,4 +1,4 @@
-import { SUBMIT_ENTRY, RECEIVE_RESULT, RECEIVE_SCORE } from '../actions';
+import { SUBMIT_ENTRY, SUBMIT_ENTRY_FAILURE, RECEIVE_RESULT, RECEIVE_SCORE } from '../actions';
 
 const initialState = {
   entry: {},
@@ -9,6 +9,11 @@ const initialState = {
 
 function ide(state = initialState, action){
   switch(action.type){
+    case SUBMIT_ENTRY_FAILURE:
+      return Object.assign({}, state, {
+        status: 0,
+        result: action.entry,
+      });
     case SUBMIT_ENTRY:
       const cstate = Object.assign({}, state, {
         status: 1,
@@ -17,7 +22,6 @@ function ide(state = initialState, action){
       return cstate;
     case RECEIVE_RESULT:
       let status = 1;
-      console.log("entjaklsjdfa 2");
       //Check if score is ready
       if (action.result.evaluation.status === 'ok'){
         status = 2;

@@ -145,7 +145,7 @@ class Profile extends Component {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Col md="3"><Label>Desea aplicar a una bolsa de trabajo?</Label></Col>
+                    <Col md="3"><Label>¿Desea optar a una plaza de trabajo?</Label></Col>
                     <Col xs="12" md="9">
                       <FormGroup check className="checkbox">
                         <Input 
@@ -172,7 +172,7 @@ class Profile extends Component {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Col md="3"><Label>Cargar nuevo CV?</Label></Col>
+                    <Col md="3"><Label>¿Cargar nuevo CV?</Label></Col>
                     <Col xs="12" md="9">
                       <InputFile
                         type='file'

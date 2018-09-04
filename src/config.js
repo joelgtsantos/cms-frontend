@@ -1,5 +1,8 @@
 let domainProfile, domainGalatea, domainSao, protocol;
 
+const SESSION_STORAGE_KEY = 'access_token';
+const PROFILE_STORAGE_KEY = 'profile';
+
 /* if (process.env.MODE === 'production') {
   domainProfile = 'fa-backend.herokuapp.com';
   domainGalatea = 'fa-backend.herokuapp.com';
@@ -15,4 +18,4 @@ const CMS_BASE_URI_PROFILE = `${protocol}://${domainProfile}`;
 const CMS_BASE_URI_GALATEA = `${protocol}://${domainGalatea}`;
 const CMS_BASE_URI_SAO = `${protocol}://${domainSao}`;
 
-export {CMS_BASE_URI_PROFILE, CMS_BASE_URI_GALATEA, CMS_BASE_URI_SAO};
+export {CMS_BASE_URI_PROFILE, CMS_BASE_URI_GALATEA, CMS_BASE_URI_SAO, SESSION_STORAGE_KEY, PROFILE_STORAGE_KEY};

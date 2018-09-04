@@ -13,6 +13,8 @@ export const SAVE_PROFILE = 'SAVE_PROFILE';
 
 export const SUBMIT_ENTRY = 'SUBMIT_ENTRY';
 
+export const SUBMIT_ENTRY_FAILURE = 'SUBMIT_ENTRY_FAILURE';
+
 export const RECEIVE_RESULT = 'RECEIVE_RESULT';
 
 export const RECEIVE_SCORE = 'RECEIVE_SCORE';
@@ -55,6 +57,13 @@ function saveProfile(profile){
 function receiveEntry(entry){
   return {
     type: SUBMIT_ENTRY,
+    entry: entry
+  }
+}
+
+function receiveEntryFailure(entry){
+  return {
+    type: SUBMIT_ENTRY_FAILURE,
     entry: entry
   }
 }
@@ -111,8 +120,26 @@ export function saveProfile(profile) {
 
 export function submitEntry(solvedTask, content, language) {
   return function(dispatch){
+    //Change the files's name of a submited task
+    //by using the programming language selected
+    if (solvedTask.submissionFileFormats[0].filename.includes('.%l')){
+      const filesplit = solvedTask.submissionFileFormats[0].filename.split('.%l');
+      const filename = filesplit[0];
+      let newFilename = "";
+
+      if (language === 'java'){
+        newFilename = `${filename}.java`;
+      }else if(language === 'python'){
+        newFilename = `${filename}.py`;
+      }else if(language === 'python'){
+        newFilename  = `${filename}.rb`;
+      }
+        solvedTask.submissionFileFormats[0].filename = newFilename;
+    }
+    
     client.submitEntry(solvedTask, content, language)
       .then(json => { dispatch(receiveEntry(json));})
+      .catch((err) => { dispatch(receiveEntryFailure(err)) })
   }
 }
 

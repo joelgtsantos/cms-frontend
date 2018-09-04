@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { 
   Button, 
   Card, 
@@ -13,7 +14,7 @@ import 'brace/mode/java';
 import 'brace/ext/language_tools';
 import 'brace/ext/searchbox';
 import { submitEntry, retrieveResult, retrieveScore } from '../../../actions';
-import { connect } from 'react-redux';
+import { PROFILE_STORAGE_KEY } from '../../../config';
 import { Autocomplete } from 'brace/ext/language_tools';
 
 const languages = [
@@ -49,12 +50,24 @@ class IDE extends Component{
     this.setState({ code: code});
   }
 
+  //Save actual code into local storage
   onChange = (newValue) => {
-    console.log('change',newValue);
+    localStorage.setItem(`${this.profile.id}_${this.props.task.name}`, newValue);
   }
 
+  //Load from local storage
   onLoad = () => {
-    console.log('i\'ve loaded');
+    this.profile = JSON.parse(localStorage.getItem(PROFILE_STORAGE_KEY));
+    if (this.profile){
+      const task = localStorage.getItem(`${this.profile.id}_${this.props.task.name}`);
+      if(task){
+        const code = Object.assign({}, this.state.code);
+        code.value = task;
+        this.setState({ code: code});
+      }else{
+        localStorage.setItem(`${this.profile.id}_${this.props.task.name}`, '');
+      }
+    }
   }
 
   onSubmitEntry = () => {
@@ -62,7 +75,6 @@ class IDE extends Component{
   }
 
   componentWillReceiveProps(update) {
-    console.log('update ',update);
     switch (update.ide.status){
       case 1:
         return setTimeout(
@@ -100,38 +112,49 @@ class IDE extends Component{
               </Col>
             </Row>        
           </CardHeader>
-          <CardBody>
-            <AceEditor
-              mode={this.state.code.mode}
-              onLoad={this.onLoad}
-              theme="github"
-              value={this.state.code.value}
-              name="UNIQUE_ID_OF_DIV"
-              fontSize={14}
-              height="200px"
-              width="100%"
-              showPrintMargin={true}
-              showGutter={true}
-              highlightActiveLine={true}
-              setOptions={{
-                enableBasicAutocompletion: true,
-                enableLiveAutocompletion: true,
-                enableSnippets: true,
-                showLineNumbers: true,
-                tabSize: 2,
-              }}
-            />
-          </CardBody>
+          { 
+            this.props.task.id
+            ?
+            <CardBody>
+              <AceEditor
+                mode={this.state.code.mode}
+                onLoad={this.onLoad}
+                onChange={this.onChange}
+                theme="github"
+                value={this.state.code.value}
+                name="UNIQUE_ID_OF_DIV"
+                fontSize={14}
+                height="200px"
+                width="100%"
+                showPrintMargin={true}
+                showGutter={true}
+                highlightActiveLine={true}
+                setOptions={{
+                  enableBasicAutocompletion: true,
+                  enableLiveAutocompletion: true,
+                  enableSnippets: true,
+                  showLineNumbers: true,
+                  tabSize: 2,
+                }}
+              />
+            </CardBody>
+            :
+            ''
+          }
           <CardFooter>
               {
                 
-                this.props.ide.status >= 1 ? <p> COMPILE ... </p> : '' 
+                this.props.ide.status == 0 ? <h6> { this.props.ide.result.detail } </h6> : ''
               }
               {
-                this.props.ide.status >= 2 ? <p> RUN ... </p> : ' '
+                
+                this.props.ide.status >= 1 ? <h6> COMPILE ... </h6> : '' 
               }
               {
-                this.props.ide.status >= 3 ? <p> SCORE {this.props.ide.score.value} </p> : ' '
+                this.props.ide.status >= 2 ? <h6> RUN ... </h6> : ' '
+              }
+              {
+                this.props.ide.status >= 3 ? <h5> SCORE {this.props.ide.score.value} </h5> : ' '
               }
           </CardFooter>
         </Card>

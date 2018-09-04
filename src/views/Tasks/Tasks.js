@@ -49,7 +49,7 @@ class Contests extends Component {
                     <i className="fa fa-check float-right"></i><Link to={taskLink}>{task.name}</Link>
                   </CardHeader>
                   <CardBody>
-                    <h4>{task.title}</h4>
+                    <h4 className="text-center">{task.title}</h4>
                   </CardBody>
                 </Card>
               </Col>

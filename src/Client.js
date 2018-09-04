@@ -1,9 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import history from './history';
-import { CMS_BASE_URI_PROFILE, CMS_BASE_URI_GALATEA, CMS_BASE_URI_SAO } from './config';
-
-const SESSION_STORAGE_KEY = 'access_token';
-const PROFILE_STORAGE_KEY = 'profile';
+import { SESSION_STORAGE_KEY,PROFILE_STORAGE_KEY, CMS_BASE_URI_PROFILE, CMS_BASE_URI_GALATEA, CMS_BASE_URI_SAO } from './config';
 
 class Client {
 
@@ -121,67 +118,19 @@ class Client {
   /*
   * SAO Endopoints
   */
-
-/*   submitEntry = (solvedTask, content, language) => {
-    const task = {
-      "contestSlug": solvedTask.contest.name,
-      "ranked": false,
-      "sources": [
-        {
-          "content": content,
-          "encoding": "Dolor magnam sed est iusto.",
-          "language": language,
-          "name": solvedTask.submissionFileFormats[0].filename
-        }
-      ],
-      "taskSlug": solvedTask.name
-    }
-
-    let that = this;
-
-    return new Promise(function(resolve, reject){
-      //Get entry
-      const url = `${CMS_BASE_URI_SAO}/entries`;
-      that._postWithToken(url, task).then((data) => {
-        
-        const url2 = `${CMS_BASE_URI_SAO}/results/${data.links.result.id}`;
-        //Interval consulting each 0.1s 
-        let result = setInterval(
-          //Get results
-          that._getWithToken(url2, task).then((data) => {
-            console.log(data);
-
-            //Clear inteval if status is ok
-            if (data.evaluation.status === 'ok'){
-              clearInterval(result);
-
-              //Get scores
-              const url2 = `${CMS_BASE_URI_SAO}/scores/scoreID?scoreID=${data.links.score.id}`;
-              that._getWithToken(url2, task).then((data) => {
-                resolve(data);
-              });
-            }
-
-          })
-            ,2000); 
-       });
-    });
-  } */
-
-
   submitEntry = (solvedTask, content, language) => {
     const task = {
-      "contestSlug": solvedTask.contest.name,
-      "ranked": false,
-      "sources": [
+      'contestSlug': solvedTask.contest.name,
+      'ranked': false,
+      'sources': [
         {
-          "content": content,
-          "encoding": "Dolor magnam sed est iusto.",
-          "language": language,
-          "name": solvedTask.submissionFileFormats[0].filename
+          'content': content,
+          'encoding': 'utf-8',
+          'language': language,
+          'name': solvedTask.submissionFileFormats[0].filename
         }
       ],
-      "taskSlug": solvedTask.name
+      'taskSlug': solvedTask.name
     }
 
     const url = `${CMS_BASE_URI_SAO}/entries`;
