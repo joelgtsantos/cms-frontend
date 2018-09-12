@@ -52,20 +52,23 @@ class IDE extends Component{
 
   //Save actual code into local storage
   onChange = (newValue) => {
-    localStorage.setItem(`${this.profile.id}_${this.props.task.name}`, newValue);
+    this.task = JSON.parse(localStorage.getItem(`${this.profile.id}_${this.props.task.name}`));
+    this.task.code = newValue;
+    localStorage.setItem(`${this.profile.id}_${this.props.task.name}`,JSON.stringify(this.task));
   }
 
   //Load from local storage
   onLoad = () => {
     this.profile = JSON.parse(localStorage.getItem(PROFILE_STORAGE_KEY));
     if (this.profile){
-      const task = localStorage.getItem(`${this.profile.id}_${this.props.task.name}`);
-      if(task){
+      this.task = JSON.parse(localStorage.getItem(`${this.profile.id}_${this.props.task.name}`));
+      if(this.task){
         const code = Object.assign({}, this.state.code);
-        code.value = task;
+        code.value = this.task.code;
         this.setState({ code: code});
       }else{
-        localStorage.setItem(`${this.profile.id}_${this.props.task.name}`, '');
+        this.task = {score: 0, code: ''}
+        localStorage.setItem(`${this.profile.id}_${this.props.task.name}`, JSON.stringify(this.task));
       }
     }
   }
@@ -88,6 +91,16 @@ class IDE extends Component{
             this.props.retrieveScore(update.ide.entry.links.score.id)
           }
           .bind(this), 1000);
+      case 3:
+        this.task = JSON.parse(localStorage.getItem(`${this.profile.id}_${this.props.task.name}`));
+
+        if(this.props.ide.score.value > 0){
+          this.task.score = this.props.ide.score.value;
+        }
+
+        localStorage.setItem(`${this.profile.id}_${this.props.task.name}`, JSON.stringify(this.task));
+
+        return true;
       default:
           return true;
     }
@@ -99,13 +112,14 @@ class IDE extends Component{
         <Card>
           <CardHeader>              
             <Row>
-              <Col xs="6" md="6">
+              <Col xs="3" md="3">
                 <select name="mode" onChange={this.setMode} value={this.state.code.mode}>
                   {languages.map((lang) => <option  key={lang} value={lang}>{lang}</option>)}
                 </select>
               </Col>
-              <Col xs="3" md="3">
-                <Button block color="primary"><i size={'sm'} className="icon-arrow-right-circle icons "></i> Run</Button>
+              <Col xs="6" md="6">
+                {/* <Button block color="primary"><i size={'sm'} className="icon-arrow-right-circle icons "></i> Run</Button> */}
+                <h5>Punteo actual { this.task ? this.task.score : 0 } </h5>
               </Col>
               <Col xs="3" md="3">
                 <Button block color="success" onClick={this.onSubmitEntry}><i size={'sm'} className="icon-arrow-up-circle icons "></i> Submit</Button>
