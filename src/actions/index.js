@@ -19,6 +19,8 @@ export const RECEIVE_RESULT = 'RECEIVE_RESULT';
 
 export const RECEIVE_SCORE = 'RECEIVE_SCORE';
 
+export const RESET_IDE = 'RESET_IDE';
+
 function receiveTasks(tasks) {
   return { 
     type: RECEIVE_TASKS, 
@@ -79,6 +81,12 @@ function receiveScore(score){
   return {
     type: RECEIVE_SCORE,
     score: score
+  }
+}
+
+function applyResetIDE(){
+  return {
+    type: RESET_IDE
   }
 }
 
@@ -154,6 +162,12 @@ export function retrieveScore(id) {
   return function(dispatch){
     client.retrieveScore(id)
     .then(json => { dispatch(receiveScore(json));})
+  }
+}
+
+export function resetIDE() {
+  return function(dispatch){
+    dispatch(applyResetIDE());
   }
 }
 

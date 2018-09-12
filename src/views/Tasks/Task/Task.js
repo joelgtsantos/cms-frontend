@@ -7,7 +7,7 @@ import {
   Col, 
   Row
  } from 'reactstrap';
-import { fetchTask } from '../../../actions';
+import { fetchTask, resetIDE } from '../../../actions';
 import { connect } from 'react-redux';
 import IDE from './IDE';
 import marked from 'marked';
@@ -21,6 +21,7 @@ class Task extends Component{
 
   componentDidMount(){
     this.props.fetchTask(this.props.match.params.id);
+    this.props.resetIDE();
   }
 
   componentWillReceiveProps(update) {
@@ -62,8 +63,9 @@ class Task extends Component{
 
 function mapStateToProps(state){
   return {
-    task: state.task
+    task: state.task,
+    ide: state.ide
   }
 }
 
-export default connect(mapStateToProps, { fetchTask })(Task);
+export default connect(mapStateToProps, { fetchTask, resetIDE })(Task);
