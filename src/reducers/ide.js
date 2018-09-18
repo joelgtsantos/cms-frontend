@@ -1,4 +1,4 @@
-import { SUBMIT_ENTRY, SUBMIT_ENTRY_FAILURE, RECEIVE_RESULT, RECEIVE_SCORE, RESET_IDE } from '../actions';
+import { SUBMIT_ENTRY, SUBMIT_ENTRY_FAILURE, RECEIVE_RESULT, RECEIVE_SCORE } from '../actions';
 
 const initialState = {
   entry: {},
@@ -36,8 +36,6 @@ function ide(state = initialState, action){
         status: 3,
         score: action.score,
       });
-    case RESET_IDE:
-      return initialState;
     default:
       return state;
   }

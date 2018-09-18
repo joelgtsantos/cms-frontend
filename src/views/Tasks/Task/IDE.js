@@ -55,6 +55,11 @@ class IDE extends Component{
     this.task = JSON.parse(localStorage.getItem(`${this.profile.id}_${this.props.task.name}`));
     this.task.code = newValue;
     localStorage.setItem(`${this.profile.id}_${this.props.task.name}`,JSON.stringify(this.task));
+    const code = Object.assign({}, this.state.code);
+    
+    code.value = newValue;
+
+    this.setState({ code: code});
   }
 
   //Load from local storage
@@ -93,7 +98,7 @@ class IDE extends Component{
           .bind(this), 1000);
       case 3:
         this.task = JSON.parse(localStorage.getItem(`${this.profile.id}_${this.props.task.name}`));
-
+        
         if(this.props.ide.score.value > 0){
           this.task.score = this.props.ide.score.value;
         }

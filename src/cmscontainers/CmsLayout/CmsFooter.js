@@ -15,7 +15,7 @@ class CmstFooter extends Component {
 
     return (
       <React.Fragment>
-        <span><a href="https://coreui.io">CoreUI</a> &copy; 2018 creativeLabs.</span>
+        <span><a href="https://github.com/joelgtsantos">Thesis based in CMS</a> &copy; 2018.</span>
         <span className="ml-auto">Powered by <a href="https://coreui.io/react">CoreUI for React</a></span>
       </React.Fragment>
     );
