@@ -18,4 +18,10 @@ const CMS_BASE_URI_PROFILE = `${protocol}://${domainProfile}`;
 const CMS_BASE_URI_GALATEA = `${protocol}://${domainGalatea}`;
 const CMS_BASE_URI_SAO = `${protocol}://${domainSao}`;
 
-export {CMS_BASE_URI_PROFILE, CMS_BASE_URI_GALATEA, CMS_BASE_URI_SAO, SESSION_STORAGE_KEY, PROFILE_STORAGE_KEY};
+export {
+        CMS_BASE_URI_PROFILE, 
+        CMS_BASE_URI_GALATEA, 
+        CMS_BASE_URI_SAO, 
+        SESSION_STORAGE_KEY, 
+        PROFILE_STORAGE_KEY
+      };

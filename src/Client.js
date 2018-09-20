@@ -1,6 +1,11 @@
 import fetch from 'isomorphic-fetch';
 import history from './history';
-import { SESSION_STORAGE_KEY,PROFILE_STORAGE_KEY, CMS_BASE_URI_PROFILE, CMS_BASE_URI_GALATEA, CMS_BASE_URI_SAO } from './config';
+import {  
+          SESSION_STORAGE_KEY,
+          PROFILE_STORAGE_KEY,
+          CMS_BASE_URI_PROFILE, 
+          CMS_BASE_URI_GALATEA, 
+          CMS_BASE_URI_SAO } from './config';
 
 class Client {
 
@@ -91,12 +96,12 @@ class Client {
   }
 
   getProfile() {
-    const url = `${CMS_BASE_URI_PROFILE}/user/extra`;
+    const url = `${CMS_BASE_URI_PROFILE}/users/extra`;
     return this._getWithToken(url).then((data) => data);
   }
 
   saveProfile(profile) {
-    const url = `${CMS_BASE_URI_PROFILE}/user/extra`;
+    const url = `${CMS_BASE_URI_PROFILE}/users/extra`;
     return this._postWithToken(url, profile).then((data) => data);
   }
 
@@ -147,7 +152,17 @@ class Client {
     const url = `${CMS_BASE_URI_SAO}/scores/${id}`;
     return this._getWithToken(url).then((data) => data);
   }
-f
+
+  getLeaderBoard = () => {
+    const url = `${CMS_BASE_URI_SAO}/scores/sum`;
+    return this._getWithToken(url).then((data) => data);
+  }
+
+  getUser = (id) => {
+    const url = `${CMS_BASE_URI_PROFILE}/users/${id}`;
+    return this._getWithToken(url).then((data) => data);
+  }
+
 }
 
 export const client = new Client();

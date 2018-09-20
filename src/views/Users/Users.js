@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchLeaderboard } from '../../actions';
+import { CMS_BASE_URI_PROFILE } from '../../config';
 import { Badge, Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 
-import usersData from './UsersData'
-
 function UserRow(props) {
-  const user = props.user
-  const userLink = `#/users/${user.id}`
-
+  const user = props.user;
+  const userLink = `${CMS_BASE_URI_PROFILE}/user/${user.id}`;
+ 
   const getBadge = (status) => {
     return status === 'Active' ? 'success' :
       status === 'Inactive' ? 'secondary' :
@@ -16,21 +17,24 @@ function UserRow(props) {
   }
 
   return (
-    <tr key={user.id.toString()}>
-        <th scope="row"><a href={userLink}>{user.id}</a></th>
-        <td><a href={userLink}>{user.name}</a></td>
-        <td>{user.registered}</td>
-        <td>{user.role}</td>
-        <td><Badge href={userLink} color={getBadge(user.status)}>{user.status}</Badge></td>
+    <tr key={user.userID.toString()}>
+        <th scope="row">{props.index}</th>
+        <td>{user.name}</td>
+        <td>{user.value}</td>
+        {/* <td><Badge href={userLink} color={getBadge(user.status)}>{user.status}</Badge></td> */}
     </tr>
   )
 }
 
 class Users extends Component {
 
-  render() {
+  componentDidMount = () => {
+    this.props.fetchLeaderboard();
+  }
 
-    const userList = usersData.filter((user) => user.id < 10)
+  render() {
+    //console.log(this.props.leaderboard);
+    const userList = this.props.leaderboard;/* .filter((user) => user.id < 10) */
 
     return (
       <div className="animated fadeIn">
@@ -38,7 +42,7 @@ class Users extends Component {
           <Col xl={6}>
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i> Users <small className="text-muted">example</small>
+                <i className="fa fa-align-justify"></i> Top 10 <small className="text-muted">scores</small>
               </CardHeader>
               <CardBody>
                 <Table responsive hover>
@@ -46,14 +50,14 @@ class Users extends Component {
                     <tr>
                       <th scope="col">id</th>
                       <th scope="col">name</th>
-                      <th scope="col">registered</th>
-                      <th scope="col">role</th>
-                      <th scope="col">status</th>
+                      <th scope="col">score</th>
+                      {/* <th scope="col">role</th>
+                      <th scope="col">status</th> */}
                     </tr>
                   </thead>
                   <tbody>
-                    {userList.map((user, index) =>
-                      <UserRow key={index} user={user}/>
+                    {userList.arr.map((user, index) =>
+                      <UserRow key={index} index={index + 1} user={user}/>
                     )}
                   </tbody>
                 </Table>
@@ -66,4 +70,10 @@ class Users extends Component {
   }
 }
 
-export default Users;
+function mapStateToProps(state){
+  return {
+    leaderboard: state.leaderboard
+  }
+}
+
+export default connect(mapStateToProps, { fetchLeaderboard })(Users);

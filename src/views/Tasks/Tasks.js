@@ -31,7 +31,7 @@ class Contests extends Component {
   }
 
   render() {
-    console.log(this.props.client);
+    console.log(this.props.tasks);
     return (
       <div className="animated fadeIn">
         <h5> Bienvenido {this.props.client.profile.firstName} </h5>

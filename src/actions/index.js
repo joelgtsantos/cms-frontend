@@ -21,6 +21,14 @@ export const RECEIVE_SCORE = 'RECEIVE_SCORE';
 
 export const RESET_IDE = 'RESET_IDE';
 
+export const RECEIVE_LEADERBOARD = 'RECEIVE_LEADERBOARD';
+
+export const ADD_USER_LEADERBOARD = 'ADD_USER_LEADERBOARD';
+
+export const RESET_LEADERBOARD = 'RESET_LEADERBOARD';
+
+
+//Dispatch functions
 function receiveTasks(tasks) {
   return { 
     type: RECEIVE_TASKS, 
@@ -87,6 +95,26 @@ function receiveScore(score){
 function applyResetIDE(){
   return {
     type: RESET_IDE
+  }
+}
+
+function receiveLeaderboard(leaderboard){
+  return {
+    type: RECEIVE_LEADERBOARD,
+    leaderboard: leaderboard
+  }
+}
+
+function addUserLeaderboard(user){
+  return {
+    type: ADD_USER_LEADERBOARD,
+    user: user
+  }
+}
+
+function resetLeaderboard(){
+  return {
+    type: RESET_LEADERBOARD
   }
 }
 
@@ -168,6 +196,22 @@ export function retrieveScore(id) {
 export function resetIDE() {
   return function(dispatch){
     dispatch(applyResetIDE());
+  }
+}
+
+export function fetchLeaderboard() {
+  return function(dispatch){
+    client.getLeaderBoard()
+    .then(json => {
+        dispatch(resetLeaderboard());
+        json.forEach((user) => {
+          client.getUser(user.userID).then(j => { 
+            user.name = j.firstName; 
+            dispatch(addUserLeaderboard(user));
+          })
+        });
+      //dispatch(receiveLeaderboard(json));
+    })
   }
 }
 

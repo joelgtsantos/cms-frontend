@@ -12,6 +12,7 @@ function Loading() {
 const Users = Loadable({
   loader: () => import('./views/Users/Users'),
   loading: Loading,
+  delay: 20
 });
 
 const User = Loadable({
