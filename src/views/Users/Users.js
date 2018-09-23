@@ -17,10 +17,10 @@ function UserRow(props) {
   }
 
   return (
-    <tr key={user.userID.toString()}>
+    <tr key={user.id.toString()}>
         <th scope="row">{props.index}</th>
         <td>{user.name}</td>
-        <td>{user.value}</td>
+        <td>{user.score}</td>
         {/* <td><Badge href={userLink} color={getBadge(user.status)}>{user.status}</Badge></td> */}
     </tr>
   )
@@ -33,30 +33,26 @@ class Users extends Component {
   }
 
   render() {
-    //console.log(this.props.leaderboard);
-    const userList = this.props.leaderboard;/* .filter((user) => user.id < 10) */
-
+    const userList = this.props.leaderboard;
     return (
       <div className="animated fadeIn">
         <Row>
-          <Col xl={6}>
+          <Col xs="12" md={{ size: 8, offset: 2 }}>
             <Card>
               <CardHeader>
                 <i className="fa fa-align-justify"></i> Top 10 <small className="text-muted">scores</small>
               </CardHeader>
               <CardBody>
-                <Table responsive hover>
+                <Table responsive striped hover>
                   <thead>
                     <tr>
-                      <th scope="col">id</th>
+                      <th scope="col">#</th>
                       <th scope="col">name</th>
                       <th scope="col">score</th>
-                      {/* <th scope="col">role</th>
-                      <th scope="col">status</th> */}
                     </tr>
                   </thead>
                   <tbody>
-                    {userList.arr.map((user, index) =>
+                    {userList.map((user, index) =>
                       <UserRow key={index} index={index + 1} user={user}/>
                     )}
                   </tbody>

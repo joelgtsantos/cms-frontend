@@ -203,14 +203,31 @@ export function fetchLeaderboard() {
   return function(dispatch){
     client.getLeaderBoard()
     .then(json => {
-        dispatch(resetLeaderboard());
+        //dispatch(resetLeaderboard());
+        const usersId = [];
+        const leaderboard = [];
+        
+        //Creates info of users request
         json.forEach((user) => {
-          client.getUser(user.userID).then(j => { 
-            user.name = j.firstName; 
-            dispatch(addUserLeaderboard(user));
-          })
+          usersId.push(user.userID);
         });
-      //dispatch(receiveLeaderboard(json));
+
+        //Retrieve info users
+        client.retrieveUsersInfo({users: usersId})
+          .then(users => { 
+          //user.name = j.firstName;
+
+          //Matchs every user with its name
+          json.forEach((user) => {
+            //Find match
+            let newUser = users.find(u => u.id == user.userID);
+            newUser.score = user.value;
+            leaderboard.push(newUser);
+          });
+
+          //Finally update state to show leaderboard
+          dispatch(receiveLeaderboard(leaderboard));
+        });
     })
   }
 }

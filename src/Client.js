@@ -84,7 +84,7 @@ class Client {
   login = (token) => {
     this.token = token;
 
-    const url = `${CMS_BASE_URI_PROFILE}/register`;
+    const url = `${CMS_BASE_URI_PROFILE}/auth/register`;
     return this._getWithToken(url).then((user) => {
       if (!user.error) {
         localStorage.setItem(SESSION_STORAGE_KEY, token);
@@ -161,6 +161,12 @@ class Client {
   getUser = (id) => {
     const url = `${CMS_BASE_URI_PROFILE}/users/${id}`;
     return this._getWithToken(url).then((data) => data);
+  }
+
+  //
+  retrieveUsersInfo = (users) => {
+    const url = `${CMS_BASE_URI_PROFILE}/users/`;
+    return this._postWithToken(url, users).then((data) => data);
   }
 
 }
