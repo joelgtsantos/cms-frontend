@@ -14,8 +14,10 @@ class Client {
   _getWithToken(url) {
     return fetch(url, {
         method: 'GET',
+        credentials: 'include',
         headers: {
-           'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
             'Authorization': `Bearer ${this.token}`
         }
       }).then(this.checkStatus)
@@ -25,8 +27,10 @@ class Client {
   _get(url) {
     return fetch(url, {
         method: 'GET',
+        credentials: 'include',
         headers: {
-           'Content-Type': 'application/json'
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         }
       }).then(this.checkStatus)
         .then(this.parseJson)
@@ -35,9 +39,11 @@ class Client {
   _postWithToken(url, body) {
     return fetch(url, {
         method: 'POST',
+        credentials: 'include',
         headers: {
-           'Content-Type': 'application/json',
-           'Authorization': `Bearer ${this.token}`
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${this.token}`
          },
          body: JSON.stringify(body),
       }).then(this.checkStatus)
@@ -47,8 +53,10 @@ class Client {
   _post(url, body) {
     return fetch(url, {
         method: 'POST',
+        credentials: 'include',
         headers: {
-           'Content-Type': 'application/json'
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
          },
          body: JSON.stringify(body),
       }).then(this.checkStatus)

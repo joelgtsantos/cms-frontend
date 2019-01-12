@@ -8,8 +8,8 @@ const PROFILE_STORAGE_KEY = 'profile';
   domainGalatea = 'fa-backend.herokuapp.com';
   protocol = 'https';
 } else { */
-  domainProfile = 'localhost:8080/cmsusers/api/v1';
-  domainGalatea = 'localhost:8081/galatea/v1';
+  domainProfile = 'localhost:9000/cmsusers/cmsusers/api/v1';
+  domainGalatea = 'localhost:9000/galatea/galatea/v1';
   domainSao = 'localhost:8000/sao/v1';
   protocol = 'http';
 /* } */
