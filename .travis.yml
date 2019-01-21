@@ -1,7 +1,6 @@
 language: node_js
 node_js:
 - '10.9.0'
-cache: npm
 before_install:
 - npm install
 - npm run build
@@ -16,5 +15,3 @@ deploy:
     repo: joelgtsantos/cms-frontend
 after_deploy:
 - "echo 'deployed'"
-after_failure:
-  - cat 2019-01-21T*-debug.log
