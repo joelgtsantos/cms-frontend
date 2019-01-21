@@ -3,6 +3,7 @@ node_js:
 - '10.10.0'
 before_install:
 - set +e
+- npm install
 - npm run build
 deploy:
   provider: releases
