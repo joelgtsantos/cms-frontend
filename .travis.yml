@@ -16,3 +16,5 @@ deploy:
     repo: joelgtsantos/cms-frontend
 after_deploy:
 - "echo 'deployed'"
+after_failure:
+  - cat 2019-01-21T*-debug.log
