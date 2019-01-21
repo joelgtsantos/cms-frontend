@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - '11'
 before_install:
-- npm i -g npm@2.1.6
+- npm install npm@2.1.6
 - rm -rf /usr/local/lib/node_modules/npm
 - mv node_modules/npm /usr/local/lib/node_modules/npm
 - npm install
