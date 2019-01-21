@@ -1,7 +1,7 @@
 language: node_js
 node_js:
 - '10.9.0'
-cache: cache: npm
+cache: npm
 before_install:
 - npm install
 - npm run build
