@@ -2,9 +2,6 @@ language: node_js
 node_js:
 - '0.11.15'
 before_install:
-- npm install npm@2.1.6
-- nvm install <version> 
-- mv node_modules/npm /usr/local/lib/node_modules/npm
 - npm install
 - npm run build
 deploy:
