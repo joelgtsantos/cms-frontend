@@ -16,4 +16,5 @@ deploy:
 after_deploy:
 - "echo 'deployed'"
 after_failure:
-  - cat /home/travis/.npm/_logs/2019-01-21*-debug.log
+  - cd /home/travis/.npm/_logs
+  - cat *.log
