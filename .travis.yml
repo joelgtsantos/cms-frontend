@@ -2,6 +2,7 @@ language: node_js
 node_js:
 - '10.9.0'
 before_install:
+- set +e
 - npm install
 - npm run build
 deploy:
@@ -16,5 +17,4 @@ deploy:
 after_deploy:
 - "echo 'deployed'"
 after_failure:
-  - cd /home/travis/.npm/_logs
-  - cat *.log
+- cat /home/travis/.npm/_logs/*.log
