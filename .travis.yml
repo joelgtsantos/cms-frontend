@@ -3,10 +3,10 @@ node_js:
 - '11'
 before_install:
 - set +e
-- dd if=/dev/zero of=/swap bs=1M count=2048
-- mkswap /swap
-- /swap   swap  swap  defaults  0 0
-- swapon -a
+- sudo fallocate -l 1G /swapfile
+- sudo chmod 600 /swapfile
+- sudo mkswap /swapfile
+- sudo swapon /swapfile
 - npm install
 - npm run build
 deploy:
