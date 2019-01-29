@@ -3,17 +3,10 @@ node_js:
 - '11'
 before_install:
 - set +e
-- fallocate -l 1G /swapfile
-- chmod 600 /swapfile
-- mkswap /swapfile
-- swapon /swapfile
-- swapon --show
-- cp /etc/fstab /etc/fstab.bak
-- '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
-- sysctl vm.swappiness=10
-- 'vm.swappiness=10' | sudo tee -a /etc/sysctl.conf
-- sysctl vm.vfs_cache_pressure=50
-- 'vm.vfs_cache_pressure=50' | sudo tee -a /etc/sysctl.conf
+- dd if=/dev/zero of=/swap bs=1M count=2048
+- mkswap /swap
+- /swap   swap  swap  defaults  0 0
+- swapon -a
 - npm install
 - npm run build
 deploy:
