@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- '11'
+- '11.0.0'
 script:
 - set +e
 - sudo fallocate -l 1G /swapfile
