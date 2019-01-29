@@ -10,6 +10,7 @@ script:
 - sudo chmod 600 /swapfile
 - sudo mkswap /swapfile
 - sudo swapon /swapfile
+- sudo ulimit -u 
 - npm test
 - npm run build
 deploy:
