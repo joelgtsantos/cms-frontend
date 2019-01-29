@@ -1,7 +1,10 @@
 language: node_js
 node_js:
 - '11'
-before_install:
+cache:
+  directories:
+  - node_modules
+script:
 - set +e
 - sudo fallocate -l 1G /swapfile
 - sudo chmod 600 /swapfile
