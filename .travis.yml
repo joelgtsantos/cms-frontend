@@ -10,8 +10,7 @@ script:
 - sudo chmod 600 /swapfile
 - sudo mkswap /swapfile
 - sudo swapon /swapfile
-- npm run clean
-- npm install
+- npm test
 - npm run build
 deploy:
   provider: releases
