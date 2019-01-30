@@ -3,11 +3,6 @@ node_js:
 - '11.0.0'
 script:
 - set +e
-- sudo fallocate -l 1G /swapfile
-- sudo chmod 600 /swapfile
-- sudo mkswap /swapfile
-- sudo swapon /swapfile
-- sudo ulimit -u 
 - npm test
 - npm run build
 deploy:
