@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchTasks } from '../../actions';
-import { Badge, Card, CardBody, CardFooter, CardHeader, Col, Row, Collapse, Fade } from 'reactstrap';
-import { AppSwitch } from '@coreui/react'
+import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
 
 class Contests extends Component {
   constructor(props) {

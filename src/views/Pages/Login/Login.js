@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
-import { GoogleLogin, GoogleLogout  } from 'react-google-login';
+import { GoogleLogin } from 'react-google-login';
 import GitHubLogin from 'react-github-login';
 import fetch from 'isomorphic-fetch';
 import { connect } from 'react-redux';

@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchProfile, saveProfile } from '../../actions';
-import FileSaver from 'file-saver';
+/*import FileSaver from 'file-saver';*/
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import InputFile from './InputFile';
 import {
   Modal, 
-  ModalBody, 
-  ModalFooter, 
   ModalHeader,
   Button,
   Card,
   CardBody,
-  CardFooter,
   CardHeader,
   Col,
   Form,
@@ -68,7 +65,7 @@ class Profile extends Component {
     this.setState({birthdate:  moment(update.profile.birthdate)});
     this.setState({study: update.profile.study });
     this.setState({work: update.profile.work });
-    this.setState({wantWork: update.profile.wantWork == 'true' || update.profile.wantWork === 'true' ? true: false });
+    this.setState({wantWork: update.profile.wantWork === 'true' || update.profile.wantWork === 'true' ? true: false });
     this.setState({cv: update.profile.cv });
     this.setState({fileName: update.profile.fileName });
     this.setState({fileNameWeb: update.profile.fileNameWeb });
@@ -161,7 +158,7 @@ class Profile extends Component {
                   <FormGroup row>
                     <Col md="3"><Label>Curriculum viate</Label></Col>
                     <Col md="2" className="mb-3 mb-xl-0 text-center">
-                    <a id='dwnldLnk' download={this.state.fileName} /> 
+                    <a id='dwnldLnk' download={this.state.fileName} > 
                       <Button 
                         /* onClick={`${this.state.fileNameWeb},${this.state.cv}`}  */
                         onClick={this.download}
@@ -169,6 +166,7 @@ class Profile extends Component {
                         className="btn-pill btn btn-primary btn-sm">
                           <i className="fa icon-docs"></i>&nbsp;{this.state.fileName}
                       </Button>
+                    </a>
                     </Col>
                   </FormGroup>
                   <FormGroup row>

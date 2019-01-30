@@ -15,7 +15,6 @@ import 'brace/ext/language_tools';
 import 'brace/ext/searchbox';
 import { submitEntry, retrieveResult, retrieveScore } from '../../../actions';
 import { PROFILE_STORAGE_KEY } from '../../../config';
-import { Autocomplete } from 'brace/ext/language_tools';
 
 const languages = [
   'java',
@@ -163,7 +162,7 @@ class IDE extends Component{
           <CardFooter>
               {
                 
-                this.props.ide.status == 0 ? <h6> { this.props.ide.result.detail } </h6> : ''
+                this.props.ide.status === 0 ? <h6> { this.props.ide.result.detail } </h6> : ''
               }
               {
                 

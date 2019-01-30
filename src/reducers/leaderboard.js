@@ -1,4 +1,4 @@
-import { RECEIVE_LEADERBOARD, ADD_USER_LEADERBOARD, RESET_LEADERBOARD } from '../actions';
+import { RECEIVE_LEADERBOARD, /*ADD_USER_LEADERBOARD*/ RESET_LEADERBOARD } from '../actions';
 
 const initialUserState = [];
 

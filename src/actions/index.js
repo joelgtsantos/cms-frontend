@@ -1,4 +1,3 @@
-import history from '../history';
 import { client } from '../Client';
 
 export const RECEIVE_TASKS = 'RECEIVE_TASKS';
@@ -43,12 +42,12 @@ function receiveTask(task) {
   };
 }
 
-function login(user){
+/*function login(user){
   return {
     type: LOGIN_SUCCESS,
     user: user
   }
-}
+}*/
 
 function receiveProfile(profile){
   return {
@@ -57,12 +56,12 @@ function receiveProfile(profile){
   }
 }
 
-function saveProfile(profile){
+/*function saveProfile(profile){
   return {
     type: LOGIN_SUCCESS,
     profile: profile
   }
-}
+}*/
 
 function receiveEntry(entry){
   return {
@@ -105,18 +104,18 @@ function receiveLeaderboard(leaderboard){
   }
 }
 
-function addUserLeaderboard(user){
+/*function addUserLeaderboard(user){
   return {
     type: ADD_USER_LEADERBOARD,
     user: user
   }
-}
+}*/
 
-function resetLeaderboard(){
+/*function resetLeaderboard(){
   return {
     type: RESET_LEADERBOARD
   }
-}
+}*/
 
 //API Calls
 export function fetchTasks() {
@@ -220,7 +219,7 @@ export function fetchLeaderboard() {
           //Matchs every user with its name
           json.forEach((user) => {
             //Find match
-            let newUser = users.find(u => u.id == user.userID);
+            let newUser = users.find(u => u.id === user.userID);
             newUser.score = user.value;
             leaderboard.push(newUser);
           });

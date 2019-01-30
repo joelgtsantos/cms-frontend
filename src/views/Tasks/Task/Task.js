@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {
   Card, 
-  CardBody, 
-  CardFooter, 
+  CardBody,  
   CardHeader, 
   Col, 
   Row

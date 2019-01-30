@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchLeaderboard } from '../../actions';
-import { CMS_BASE_URI_PROFILE } from '../../config';
-import { Badge, Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
+/*import { CMS_BASE_URI_PROFILE } from '../../config';*/
+import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 
 function UserRow(props) {
   const user = props.user;
-  const userLink = `${CMS_BASE_URI_PROFILE}/user/${user.id}`;
+  //const userLink = `${CMS_BASE_URI_PROFILE}/user/${user.id}`;
  
-  const getBadge = (status) => {
-    return status === 'Active' ? 'success' :
-      status === 'Inactive' ? 'secondary' :
-        status === 'Pending' ? 'warning' :
-          status === 'Banned' ? 'danger' :
-            'primary'
-  }
-
   return (
     <tr key={user.id.toString()}>
         <th scope="row">{props.index}</th>
