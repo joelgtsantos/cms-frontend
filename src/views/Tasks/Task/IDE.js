@@ -8,8 +8,7 @@ import {
   CardHeader, 
   Col,
   Row,
-  Input,
-  ThemeColor} from 'reactstrap';
+  Input} from 'reactstrap';
 import AceEditor from 'react-ace';
 import 'brace/theme/github';
 import 'brace/mode/java';
@@ -22,8 +21,7 @@ import { submitEntry,
         submitDraft,
         retrieveDraftSubmitTrx,
         retrieveDraftTrx,
-        retrieveDraftResult,
-        entryFailure 
+        retrieveDraftResult 
       } from '../../../actions';
 import { PROFILE_STORAGE_KEY } from '../../../config';
 
