@@ -134,32 +134,82 @@ class Client {
   submitEntry = (solvedTask, content, language) => {
     const task = {
       'contestSlug': solvedTask.contest.name,
-      'ranked': false,
+      'token': true,
       'sources': [
         {
           'content': content,
-          'encoding': 'utf-8',
-          'language': language,
-          'name': solvedTask.submissionFileFormats[0].filename
+          'fileid': solvedTask.submissionFileFormats[0].filename,
+          'name': solvedTask.submissionFileFormats[0].filename.replace("%l", solvedTask.submissionFileFormats[0].extension),
+          'language': language
         }
       ],
       'taskSlug': solvedTask.name
     }
 
-    const url = `${CMS_BASE_URI_SAO}/entries`;
+    const url = `${CMS_BASE_URI_SAO}/submit-entry`;
 
     return this._postWithToken(url, task).then((data) => data);
   }
 
-  retrieveResult = (id) => {
-    const url = `${CMS_BASE_URI_SAO}/results/${id}`;
-    return this._getWithToken(url).then((data) => data);
+  retrieveEntrySubmitTrx = (url) => {
+    const completeUrl = `${CMS_BASE_URI_SAO}${url}`;
+    return this._getWithToken(completeUrl).then((data) => data);
   }
 
-  retrieveScore = (id) => {
-    const url = `${CMS_BASE_URI_SAO}/scores/${id}`;
-    return this._getWithToken(url).then((data) => data);
+  retrieveEntryTrx = (url) => {
+    const completeUrl = `${CMS_BASE_URI_SAO}${url}`;
+    return this._getWithToken(completeUrl).then((data) => data);
   }
+
+  retrieveEntryResult = (url) => {
+    const completeUrl = `${CMS_BASE_URI_SAO}${url}`;
+    return this._getWithToken(completeUrl).then((data) => data);
+  }
+
+  /* Drafts */
+
+  submitDraft = (solvedTask, content, language, draftInput) => {
+    const task = {
+      'contestSlug': solvedTask.contest.name,
+      'token': true,
+      'sources': [
+        {
+          'content': content,
+          'fileid': solvedTask.submissionFileFormats[0].filename,
+          'name': solvedTask.submissionFileFormats[0].filename.replace("%l", solvedTask.submissionFileFormats[0].extension),
+          'language': language
+        },
+        {
+          "content": draftInput,
+          "fileid": "input",
+          "filename": "input.txt",
+          "language": language
+        }
+      ],
+      'taskSlug': solvedTask.name
+    }
+
+    const url = `${CMS_BASE_URI_SAO}/submit-draft`;
+
+    return this._postWithToken(url, task).then((data) => data);
+  }
+
+  retrieveDraftSubmitTrx = (url) => {
+    const completeUrl = `${CMS_BASE_URI_SAO}${url}`;
+    return this._getWithToken(completeUrl).then((data) => data);
+  }
+
+  retrieveDraftTrx = (url) => {
+    const completeUrl = `${CMS_BASE_URI_SAO}${url}`;
+    return this._getWithToken(completeUrl).then((data) => data);
+  }
+
+  retrieveDraftResult = (url) => {
+    const completeUrl = `${CMS_BASE_URI_SAO}${url}`;
+    return this._getWithToken(completeUrl).then((data) => data);
+  }
+
+  /* Scoreboard */
 
   getLeaderBoard = () => {
     const url = `${CMS_BASE_URI_SAO}/scores/sum`;

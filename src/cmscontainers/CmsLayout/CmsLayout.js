@@ -36,7 +36,7 @@ class CmsLayout extends Component {
             <AppSidebarMinimizer />
           </AppSidebar>
           <main className="main">
-            <AppBreadcrumb appRoutes={routes}/>
+            
             <Container fluid>
               <Switch>
                 {routes.map((route, idx) => {

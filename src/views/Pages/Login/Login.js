@@ -74,6 +74,8 @@ class Login extends Component {
                           className="btn-google-plus btn-brand mr-1 mb-1 btn btn-secondary btn-block"
                           onSuccess={this.responseGoogle}
                           onFailure={this.responseGoogle}
+                          scope="profile email"
+                          fetchBasicProfile={true}
                           prompt="consent"
                         >
                           <i className="fa fa-google icon-left"></i><span>Sign in with Google</span>

@@ -15,3 +15,12 @@
   display: inline-block!important;
   margin-left: 0.9rem;
 }
+
+.text-draft{
+  float: left !important;
+}
+
+.textarea-draft{
+  float: right !important;
+  width: 76% !important;
+}

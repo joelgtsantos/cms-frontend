@@ -14,9 +14,21 @@ export const SUBMIT_ENTRY = 'SUBMIT_ENTRY';
 
 export const SUBMIT_ENTRY_FAILURE = 'SUBMIT_ENTRY_FAILURE';
 
-export const RECEIVE_RESULT = 'RECEIVE_RESULT';
+export const RECEIVE_ENTRY_SUBMIT_TRX = 'RECEIVE_ENTRY_SUBMIT_TRX';
 
-export const RECEIVE_SCORE = 'RECEIVE_SCORE';
+export const RECEIVE_ENTRY_TRX = 'RECEIVE_ENTRY_TRX';
+
+export const RECEIVE_ENTRY_RESULT = 'RECEIVE_ENTRY_RESULT';
+
+export const SUBMIT_DRAFT = 'SUBMIT_DRAFT';
+
+export const SUBMIT_DRAFT_FAILURE = 'SUBMIT_DRAFT_FAILURE';
+
+export const RECEIVE_DRAFT_SUBMIT_TRX = 'RECEIVE_DRAFT_SUBMIT_TRX';
+
+export const RECEIVE_DRAFT_TRX = 'RECEIVE_DRAFT_TRX';
+
+export const RECEIVE_DRAFT_RESULT = 'RECEIVE_DRAFT_RESULT';
 
 export const RESET_IDE = 'RESET_IDE';
 
@@ -77,19 +89,68 @@ function receiveEntryFailure(entry){
   }
 }
 
-function receiveResult(result){
+function receiveEntrySubmitTrx(entry){
   return {
-    type: RECEIVE_RESULT,
+    type: RECEIVE_ENTRY_SUBMIT_TRX,
+    entry: entry
+  }
+}
+
+function receiveEntryTrx(entry){
+  return {
+    type: RECEIVE_ENTRY_TRX,
+    entry: entry
+  }
+}
+
+
+function receiveEntryResult(result){
+  return {
+    type: RECEIVE_ENTRY_RESULT,
     result: result
   }
 }
 
-function receiveScore(score){
+
+/* For drafts */
+
+function receiveDraft(draft){
   return {
-    type: RECEIVE_SCORE,
-    score: score
+    type: SUBMIT_DRAFT,
+    draft: draft
   }
 }
+
+function receiveDraftFailure(draft){
+  return {
+    type: SUBMIT_DRAFT_FAILURE,
+    draft: draft
+  }
+}
+
+function receiveDraftSubmitTrx(draft){
+  return {
+    type: RECEIVE_DRAFT_SUBMIT_TRX,
+    draft: draft
+  }
+}
+
+function receiveDraftTrx(draft){
+  return {
+    type: RECEIVE_DRAFT_TRX,
+    draft: draft
+  }
+}
+
+
+function receiveDraftResult(result){
+  return {
+    type: RECEIVE_DRAFT_RESULT,
+    result: result
+  }
+}
+
+/* Scoreboard */
 
 function applyResetIDE(){
   return {
@@ -158,18 +219,19 @@ export function submitEntry(solvedTask, content, language) {
     //Change the files's name of a submited task
     //by using the programming language selected
     if (solvedTask.submissionFileFormats[0].filename.includes('.%l')){
-      const filesplit = solvedTask.submissionFileFormats[0].filename.split('.%l');
-      const filename = filesplit[0];
-      let newFilename = "";
+      //const filesplit = solvedTask.submissionFileFormats[0].filename.split('.%l');
+
+      let extension = "";
 
       if (language === 'java'){
-        newFilename = `${filename}.java`;
+        extension = 'java';
       }else if(language === 'python'){
-        newFilename = `${filename}.py`;
-      }else if(language === 'python'){
-        newFilename  = `${filename}.rb`;
+        extension = 'py';
+      }else if(language === 'javascript'){
+        extension  = 'js';
       }
-        solvedTask.submissionFileFormats[0].filename = newFilename;
+      
+      solvedTask.submissionFileFormats[0].extension = extension;
     }
     
     client.submitEntry(solvedTask, content, language)
@@ -178,23 +240,88 @@ export function submitEntry(solvedTask, content, language) {
   }
 }
 
-export function retrieveResult(id) {
+export function retrieveEntrySubmitTrx(url) {
   return function(dispatch){
-    client.retrieveResult(id)
-    .then(json => { dispatch(receiveResult(json));})
+    client.retrieveEntrySubmitTrx(url)
+    .then(json => { dispatch(receiveEntrySubmitTrx(json));})
   }
 }
 
-export function retrieveScore(id) {
+export function retrieveEntryTrx(url) {
   return function(dispatch){
-    client.retrieveScore(id)
-    .then(json => { dispatch(receiveScore(json));})
+    client.retrieveEntryTrx(url)
+    .then(json => { dispatch(receiveEntryTrx(json));})
   }
 }
+
+export function retrieveEntryResult(url) {
+  return function(dispatch){
+    client.retrieveEntryResult(url)
+    .then(json => { dispatch(receiveEntryResult(json));})
+  }
+}
+
+/* For drafts */
+
+export function submitDraft(solvedTask, content, language, draftInput) {
+  return function(dispatch){
+    //Change the files's name of a submited task
+    //by using the programming language selected
+    if (solvedTask.submissionFileFormats[0].filename.includes('.%l')){
+      //const filesplit = solvedTask.submissionFileFormats[0].filename.split('.%l');
+
+      let extension = "";
+
+      if (language === 'java'){
+        extension = 'java';
+      }else if(language === 'python'){
+        extension = 'py';
+      }else if(language === 'javascript'){
+        extension  = 'js';
+      }
+      
+      solvedTask.submissionFileFormats[0].extension = extension;
+    }
+    
+    client.submitDraft(solvedTask, content, language, draftInput)
+      .then(json => { dispatch(receiveDraft(json));})
+      .catch((err) => { dispatch(receiveDraftFailure(err)) })
+  }
+}
+
+export function retrieveDraftSubmitTrx(url) {
+  return function(dispatch){
+    client.retrieveDraftSubmitTrx(url)
+    .then(json => { dispatch(receiveDraftSubmitTrx(json));})
+  }
+}
+
+export function retrieveDraftTrx(url) {
+  return function(dispatch){
+    client.retrieveDraftTrx(url)
+    .then(json => { dispatch(receiveDraftTrx(json));})
+  }
+}
+
+export function retrieveDraftResult(url) {
+  return function(dispatch){
+    client.retrieveDraftResult(url)
+    .then(json => { dispatch(receiveDraftResult(json));})
+  }
+}
+
+
+/* Scoreboard */
 
 export function resetIDE() {
   return function(dispatch){
     dispatch(applyResetIDE());
+  }
+}
+
+export function entryFailure() {
+  return function(dispatch){
+    dispatch(receiveEntryFailure());
   }
 }
 

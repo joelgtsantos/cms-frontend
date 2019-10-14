@@ -2,7 +2,7 @@ export default {
   items: [
     {
       title: true,
-      name: 'Account',
+      name: 'Menu',
       wrapper: {            // optional wrapper object
         element: '',        // required valid HTML5 element tag
         attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
@@ -10,7 +10,7 @@ export default {
       class: ''             // optional class names space delimited list for title item ex: "text-center"
     },
     {
-      name: 'Tasks',
+      name: 'Ejercicios',
       url: '/tasks',
       icon: 'icon-speedometer',
       badge: {
@@ -19,12 +19,12 @@ export default {
       },
     },
     {
-      name: 'Ranking',
+      name: 'Punteos',
       url: '/users',
       icon: 'icon-pie-chart',
     },
     {
-      name: 'Profile',
+      name: 'Perfil',
       url: '/profile',
       icon: 'icon-pencil',
     },

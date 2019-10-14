@@ -156,7 +156,7 @@ class Profile extends Component {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Col md="3"><Label>Curriculum viate</Label></Col>
+                    <Col md="3"><Label>Curriculum vitae</Label></Col>
                     <Col md="2" className="mb-3 mb-xl-0 text-center">
                     <a id='dwnldLnk' download={this.state.fileName} > 
                       <Button 

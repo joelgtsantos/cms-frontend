@@ -28,27 +28,16 @@ class CmsHeader extends Component {
         />
         <AppSidebarToggler className="d-md-down-none" display="lg" />
 
-        <Nav className="d-md-down-none" navbar>
-          <NavItem className="px-3">
-            <Link className="nav-link" to="/tasks">Tasks</Link>
-          </NavItem>
-          <NavItem className="px-3">
-            <Link className="nav-link" to="/users">Ranking</Link>
-          </NavItem>
-          <NavItem className="px-3">
-            <Link className="nav-link" to="/profile">Profile</Link>
-          </NavItem>
-        </Nav>
         <Nav className="ml-auto" navbar>
           <AppHeaderDropdown direction="down">
             <DropdownToggle nav>
-              <img src={'assets/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+              <img src={'assets/img/avatars/setting.png'} className="img-avatar" alt="admin@bootstrapmaster.com" />
             </DropdownToggle>
             <DropdownMenu right style={{ right: 'auto' }}>
-              <DropdownItem header tag="div" className="text-center"><strong>Account</strong></DropdownItem>             
-              <DropdownItem><i className="fa fa-tasks"></i> Tasks<Badge color="danger">42</Badge></DropdownItem>              
-              <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
-              <DropdownItem><i className="fa fa-user"></i> Profile</DropdownItem>
+              <DropdownItem header tag="div" className="text-center"><strong>Cuenta</strong></DropdownItem>             
+              <DropdownItem><i className="fa fa-tasks"></i> Ejercicios<Badge color="danger">42</Badge></DropdownItem>              
+              <DropdownItem header tag="div" className="text-center"><strong>Datos</strong></DropdownItem>
+              <DropdownItem><i className="fa fa-user"></i> Perfil</DropdownItem>
               <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>              
               <DropdownItem divider />              
               <DropdownItem onClick={() => {this.props.client.logout();}}><i className="fa fa-lock"></i> Logout</DropdownItem>
