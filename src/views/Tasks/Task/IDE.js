@@ -177,10 +177,10 @@ class IDE extends Component{
                 <h5>Punteo actual { this.task ? this.task.score : 0 } </h5>
               </Col>
               <Col xs="3" md=" 2">
-                <Button block color="info" onClick={this.onSubmitDraft}><i size={'sm'} className="cui-circle-check icons "></i> Ejecutar </Button>
+                <Button block color="info" onClick={this.onSubmitDraft} title="Utiliza valores de prueba para probar tu código"><i size={'sm'} className="cui-circle-check icons "></i> Ejecutar </Button>
               </Col>
               <Col xs="3" md=" 2">
-                <Button block color="success" onClick={this.onSubmitEntry}><i size={'sm'} className="icon-cloud-upload icons "></i> Enviar </Button>
+                <Button block color="success" onClick={this.onSubmitEntry} title="Utiliza esta opción para enviar tu código y generar puntos"><i size={'sm'} className="icon-cloud-upload icons "></i> Enviar </Button>
               </Col>
             </Row>        
           </CardHeader>
@@ -261,8 +261,8 @@ class IDE extends Component{
                     <Col xs="12" md="9"> {this.props.ide.result.compilation.stderr} </Col>
                     <Col xs="12" md="3"> </Col> 
                     <Col xs="12" md="9"> {this.props.ide.result.compilation.stdout} </Col>
-                    <Col xs="12" md="3"> <h6> Score </h6></Col> 
-                    <Col xs="12" md="9"> {this.props.ide.result.score.taskValue} </Col>
+                    <Col xs="12" md="3"> <h5> Punteo </h5></Col> 
+                    <Col xs="12" md="9"> <h5>{this.props.ide.result.score.taskValue}</h5></Col>
                     <Col xs="12" md="5"> </Col> 
                     <Col xs="12" md="2" className="text-center">
                       <i size={'xl'} className="cui-circle-check icons font-2xl d-block mt-4 bg-success"></i>
@@ -300,7 +300,7 @@ class IDE extends Component{
                     <Col xs="12" md="3"> <h6> Execution </h6></Col> 
                     <Col xs="12" md="9"> {this.props.ide.result.compilation.output} </Col>
                     <Col xs="12" md="3"> </Col> 
-                    <Col xs="12" md="9"> {this.props.ide.result.compilation.stdout} </Col>
+                    <Col xs="12" md="9"> <h5>{this.props.ide.result.compilation.stdout}</h5></Col>
                     <Col xs="12" md="5"> </Col> 
                     <Col xs="12" md="2" className="text-center">
                       <i size={'xl'} className="cui-circle-check icons font-2xl d-block mt-4 bg-success"></i>

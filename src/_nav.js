@@ -18,11 +18,11 @@ export default {
         text: 'NEW',
       },
     },
-    {
-      name: 'Punteos',
-      url: '/users',
-      icon: 'icon-pie-chart',
-    },
+    //{
+    //  name: 'Punteos',
+    //  url: '/users',
+    //  icon: 'icon-pie-chart',
+    //},
     {
       name: 'Perfil',
       url: '/profile',
