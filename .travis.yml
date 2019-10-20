@@ -5,12 +5,13 @@ script:
 - set +e
 - npm test
 - npm run build
+- tar -czvf build.tar.gz build
 deploy:
   skip_cleanup: true
   provider: releases
   api_key:
     secure: gdCcLLl2txGi4EmGlAqGeXkggZu0MKX1ESsXrNxWirG0jlWenp5RAcOdSfyY2rVYZe6rjjCc9jJukq4VgJWDIcNcLTjaJDdHMQWDmX0awDh6X16JuXqEdRxtZ0JKy0NHf6G2NMdKiRGQkGL5PO72N8+8zyXgSU5Vsos5iBOrDUdGXdq8Y+mcgKBoZU0u9sVdtJVAomHGTSg5okHXkqJTXAqZxzZOZ1WAATmpvd1XwhPzNgbOtPuz8C/bJDCHzLYYdbrbuyoomcLfRW/cwH/3LvVEHRfDXVpxb39IRECnYT7cOjNOtgvXNMc6Mc+Po0ymQ0GkeUNKpXVGwNf9uWSOjG2vtW9mQDfQis2xpW7HeNQVYP+x/pwiT6ecUxe5DrmfA7YZMEvCAiIjz/1LEXxU8n1JXmrxJvMU1trEgqLAng8IeVeB/5D/cHc2a/3dhzdKmOlhI9bR6FPR1eCAfHuWO2+bEMJqYYdX2g+t9s6d2rn3Si753O9S4ObXD2GsC6Jy4UlUzUwyTGM5m1k3GPRV7RPvKU28vGq61Luex7bwUKj678xd4gqYfxPauI23NNqe12k06uRie7Y60DIWsozdj+LPoruWcouA9t3uiq2/TZWeA2HywXRG9CBTfscEZjOLF2CPKyfiAHZWOXqyncWlcqUTC4kgH215i0fJwprG+o8=
-  local_dir: build
+  file: build.tar.gz
   on:
     tags: true
     all_branches: true
