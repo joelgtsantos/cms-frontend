@@ -51,6 +51,16 @@ CoreUI-React#v2.0.0
 └── package.json
 ```
 
+#### Backend connections
+To set up the CMS backend system which CMS Fronted is going to be connected to is necessary to specify what are the URLS of each of the systems obiting around CMS. Since all of the API's are behind Zuul(HTTP Proxy) an URL usually beggins with  'localhost:9000/APPNAME'
+
+```javascript
+---
+  domainProfile: 'localhost:9000/cmsusers/cmsusers/api/v1';
+  domainGalatea: 'localhost:9000/galatea/galatea/v1';
+  domainSao: 'localhost:9000/sao/sao/v1';
+  protocol: 'http';
+```
 
 ## Credits
 

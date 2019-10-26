@@ -10,7 +10,7 @@ const PROFILE_STORAGE_KEY = 'profile';
 } else { */
   domainProfile = 'localhost:9000/cmsusers/cmsusers/api/v1';
   domainGalatea = 'localhost:9000/galatea/galatea/v1';
-  domainSao = 'localhost:8000/sao/v1';
+  domainSao = 'localhost:9000/sao/sao/v1';
   protocol = 'http';
 /* } */
 
