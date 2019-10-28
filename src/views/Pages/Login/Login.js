@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Button, Card, CardBody, CardGroup, Col, Container, Row } from 'reactstrap';
 import { GoogleLogin } from 'react-google-login';
 import GitHubLogin from 'react-github-login';
 import fetch from 'isomorphic-fetch';
