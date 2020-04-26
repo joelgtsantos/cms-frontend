@@ -1,10 +1,10 @@
 language: node_js
 node_js:
-- '11.0.0'
+- '12.16.2'
 script:
 - set +e
 - npm test
-- npm run build
+- MODE=production npm run build
 - tar -czvf build.tar.gz build
 deploy:
   skip_cleanup: true
